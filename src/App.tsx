@@ -44,6 +44,7 @@ function App() {
         setTasks({ ...tasks, [todolistID]: tasks[todolistID].filter(t => t.id !== taskiId) })
     }  // наш весь массив, [переназначаем содержимое], id2.[id2].filter...  
     function addTask(todolistID: string, title: string) {
+        debugger
         let newTask = { id: v1(), title: title, isDone: false };
         setTasks({ ...tasks, [todolistID]: [newTask, ...tasks[todolistID]] })
     }
@@ -58,13 +59,14 @@ function App() {
         delete tasks[todolistID]
     }
     const addTodoList = (title: string) => {
-        let todolist: todolistsType = {
-            id: v1(),
+        let newId = v1()
+        let newTodolist: todolistsType = {
+            id: newId,
             filtered: "all",
             title: title
         }
-        setTodolists([todolist, ...todolists])
-        setTasks({ ...tasks, [todolist.id]: [] })
+        setTodolists([newTodolist, ...todolists])
+        setTasks({ ...tasks, [newTodolist.id]: [] })
     }
     const changeTaskTitle = (todolistID: string, taskId: string, newTitle: string) => {
         setTasks({ ...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? { ...el, newTitle } : el) })
@@ -72,7 +74,7 @@ function App() {
     return (
         <div className="App">
             <AddItemForm addItem={addTodoList} />
-            {todolists.map((el, i) => {
+            {todolists.map(el => {
 
                 let tasksForTodolist = tasks[el.id];
 

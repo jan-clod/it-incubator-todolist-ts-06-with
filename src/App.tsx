@@ -66,10 +66,10 @@ function App() {
             title: title
         }
         setTodolists([newTodolist, ...todolists])
-        setTasks({ ...tasks, [newTodolist.id]: [] })
+        setTasks({ ...tasks, [newId]: [] })
     }
     const changeTaskTitle = (todolistID: string, taskId: string, newTitle: string) => {
-        setTasks({ ...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? { ...el, newTitle } : el) })
+        setTasks({ ...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? { ...el, title:newTitle } : el) })
     }
     return (
         <div className="App">
